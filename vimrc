@@ -32,3 +32,9 @@ nmap <C-n> :tabnew<CR>  " Open a new tab
 nmap <C-x> :tabclose<CR>" Close current tab
 nmap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR> " Move current tab to the left
 nmap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>    " Move current tab to the right
+
+"fold options
+set foldmethod=indent " auto fold based on indent level
+set nofoldenable
+"au BufWinLeave *.* mkview " autocommand on closing a file to store the folds 
+"au BufWinEnter *.* silent loadview " autocommand on opening a file to file's latest fold configuration
