@@ -20,10 +20,8 @@ let g:solarized_termcolors=256
 set background=dark
 " colorscheme solarized
 
-"define a command to clear search buffer
-command C let @/=""
-"make W also save just like w
-command W w
+command C let @/="" "define a command to clear search buffer
+command W w "make W also save just like w
 
 "tab navigation"
 nmap <C-l> :tabn<CR>    " Switch to the next tab
