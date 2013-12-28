@@ -38,3 +38,6 @@ set foldmethod=indent " auto fold based on indent level
 set nofoldenable
 "au BufWinLeave *.* mkview " autocommand on closing a file to store the folds 
 "au BufWinEnter *.* silent loadview " autocommand on opening a file to file's latest fold configuration
+
+"enable mouse in all modes
+set mouse=a
