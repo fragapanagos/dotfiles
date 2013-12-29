@@ -39,3 +39,6 @@ set nofoldenable
 
 "enable mouse in all modes
 set mouse=a
+
+"pathogen for easy installation of plugins
+execute pathogen#infect()
