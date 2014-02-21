@@ -42,3 +42,15 @@ set mouse=a
 
 "pathogen for easy installation of plugins
 execute pathogen#infect()
+
+"syntastic options
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
+    "note blank space or comma at end of lines
+    "disabled Syntastic errors:
+        "C0103 - variable naming convention
+let g:syntastic_python_pylint_args="--max-line-length=130 
+                                   \--max-args=15 
+                                   \--disable=C0103"
+command Scheck SyntasticCheck
