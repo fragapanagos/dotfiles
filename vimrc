@@ -31,6 +31,10 @@ nmap <C-x> :tabclose<CR>" Close current tab
 nmap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR> " Move current tab to the left
 nmap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>    " Move current tab to the right
 
+"highlight before searching
+nmap * *N
+nmap # #N
+
 "fold options
 set foldmethod=indent " auto fold based on indent level
 set nofoldenable
@@ -44,7 +48,7 @@ set mouse=a
 execute pathogen#infect()
 
 "syntastic options
-let g:syntastic_mode_map = { 'mode': 'active',
+let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': [] }
     "note blank space or comma at end of lines
