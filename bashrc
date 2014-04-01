@@ -106,17 +106,3 @@ fi
 source ~/.git-completion.bash
 export GIT_PS1_SHOWDIRTYSTATE=1
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1) \[\033[00m\]\$ '
-
-# add cuda to path
-export PATH="/usr/local/cuda/bin":$PATH
-#export LD_LIBRARY_PATH="/usr/local/cuda/lib64":$LD_LIBRARY_PATH
-export LIBRARY_PATH="/usr/lib/nvidia-current":$LIBRARY_PATH
-
-# add cula to path
-export CULA_ROOT="/usr/local/cula"
-export CULA_INC_PATH="$CULA_ROOT/include"
-export CULA_BIN_PATH_32="$CULA_ROOT/bin"
-export CULA_BIN_PATH_64="$CULA_ROOT/bin64"
-export CULA_LIB_PATH_32="$CULA_ROOT/lib"
-export CULA_LIB_PATH_64="$CULA_ROOT/lib64"
-#export LD_LIBRARY_PATH=$CULA_LIB_PATH_64:$LD_LIBRARY_PATH
