@@ -12,6 +12,7 @@ set expandtab " Expand tabs into spaces
 set autoindent " Use previous line's indentation on next line
 set smartindent " does the right thing (mostly) in programs. turn off if annoying
 set tags=tags;~ " Look for tags recursively until home directory is reached
+set colorcolumn=80 "highlight column 80
 syntax enable "enable syntax highlighting
 
 "setting up solarized colorscheme
