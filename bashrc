@@ -106,3 +106,16 @@ fi
 source ~/.git-completion.bash
 export GIT_PS1_SHOWDIRTYSTATE=1
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1) \[\033[00m\]\$ '
+
+# gmock and gtest
+export GMOCK_DIR=/home/NEF/Code/gmock-1.6.0
+export GTEST_DIR=/home/NEF/Code/gmock-1.6.0/gtest
+
+export NEUROBOADIR=/home/NEF/Code/neuro-boa
+
+# LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=${GMOCK_DIR}/lib/.libs/:${GTEST_DIR}/lib/.libs/
+
+# for ISE comment out if not uusing ISE
+#source /opt/Xilinx/14.6/ISE_DS/settings64.sh >/dev/null
+#export LD_PRELOAD=/opt/Xilinx/14.6/ISE_DS/ISE/lib/lin64/libXst_Core.so
