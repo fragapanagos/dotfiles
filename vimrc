@@ -21,16 +21,30 @@ let g:solarized_termcolors=256
 set background=dark
 " colorscheme solarized
 
-command C let @/="" "define a command to clear search buffer
-command W w "make W also save just like w
+"command to clear search buffer
+command C let @/=""
 
-"tab navigation"
+"commands to handle common typing errors
+"make W behave like w
+command W w
+"make Q behave like q
+command Q q
+"make E behave like e
+command -nargs=? -complete=file E edit <args>
+
+"pdflatex compile
+nmap <F5> :!pdflatex %<CR>
+
+"tab navigation
 nmap <C-l> :tabn<CR>    " Switch to the next tab
 nmap <C-h> :tabp<CR>    " Switch to the previous tab
 nmap <C-n> :tabnew<CR>  " Open a new tab
 nmap <C-x> :tabclose<CR>" Close current tab
 nmap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR> " Move current tab to the left
 nmap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>    " Move current tab to the right
+
+"redraw screen
+nmap <C-j> :redraw!<CR> " Redraw the screen
 
 "highlight before searching
 nmap * *N
