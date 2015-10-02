@@ -33,7 +33,7 @@ command Q q
 command -nargs=? -complete=file E edit <args>
 
 "pdflatex compile
-nmap <F5> :!pdflatex %<CR>
+nmap <F5> :w<CR>:!pdflatex %<CR>
 
 "tab navigation
 nmap <C-l> :tabn<CR>    " Switch to the next tab
