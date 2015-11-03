@@ -21,8 +21,19 @@ let g:solarized_termcolors=256
 set background=dark
 " colorscheme solarized
 
-command C let @/="" "define a command to clear search buffer
-command W w "make W also save just like w
+"command to clear search buffer
+command C let @/=""
+
+"commands to handle common typing errors
+"make W also save just like w
+command W w
+"make Q behave like q
+command Q q
+"make E behave like e
+command -nargs=? -complete=file E edit <args>
+
+"pdflatex compile
+nmap <F5> :w<CR>:!pdflatex %<CR>
 
 "tab navigation"
 nmap <C-l> :tabn<CR>    " Switch to the next tab
