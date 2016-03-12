@@ -14,6 +14,7 @@ set smartindent " does the right thing (mostly) in programs. turn off if annoyin
 set tags=tags;~ " Look for tags recursively until home directory is reached
 set colorcolumn=80 "highlight column 80
 syntax enable "enable syntax highlighting
+filetype plugin on "enable filetype specific settings
 
 "setting up solarized colorscheme
 " set t_Co=256 "enable 256-color mode
@@ -21,21 +22,22 @@ let g:solarized_termcolors=256
 set background=dark
 " colorscheme solarized
 
+"move up and down within a wrapped line
+nnoremap k gk
+nnoremap j gj
+
 "command to clear search buffer
 command C let @/=""
 
 "commands to handle common typing errors
-"make W behave like w
+"make W also save just like w
 command W w
 "make Q behave like q
 command Q q
 "make E behave like e
 command -nargs=? -complete=file E edit <args>
 
-"pdflatex compile
-nmap <F5> :w<CR>:!pdflatex %<CR>
-
-"tab navigation
+"tab navigation"
 nmap <C-l> :tabn<CR>    " Switch to the next tab
 nmap <C-h> :tabp<CR>    " Switch to the previous tab
 nmap <C-n> :tabnew<CR>  " Open a new tab
@@ -70,3 +72,8 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 let g:syntastic_python_pylint_args="--max-line-length=130 
                                    \--max-args=10 "
 command Scheck SyntasticCheck
+
+au BufRead,BufNewFile *.hac set filetype=hackt
+au BufRead,BufNewFile *.actmx set filetype=hackt
+au BufRead,BufNewFile *.act set filetype=hackt
+au! Syntax hackt source ~/.vim/syntax/hackt.vim
