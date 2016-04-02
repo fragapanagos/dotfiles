@@ -42,8 +42,8 @@ nmap <C-l> :tabn<CR>    " Switch to the next tab
 nmap <C-h> :tabp<CR>    " Switch to the previous tab
 nmap <C-n> :tabnew<CR>  " Open a new tab
 nmap <C-x> :tabclose<CR>" Close current tab
-nmap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR> " Move current tab to the left
-nmap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>    " Move current tab to the right
+nmap <silent> <A-PageUp> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>h " Move current tab to the left (h suffix to keep cursor in the place)
+nmap <silent> <A-PageDown> :execute 'silent! tabmove ' . tabpagenr()<CR>hhhh " Move current tab to the right (hhhh suffix to keep cursor in place)
 
 "redraw screen
 nmap <C-j> :redraw!<CR> " Redraw the screen
