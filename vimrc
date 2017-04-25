@@ -1,4 +1,4 @@
-set laststatus=2 " Show a status line even when only one window is shown
+set laststatus=1 " Show a status line even when only one window is shown
 set showcmd " Show command completion as typing command
 set incsearch " Highlight as searched phrase is entered
 set hlsearch " Highlight searched phrases
@@ -32,12 +32,12 @@ command Q q
 command -nargs=? -complete=file E edit <args>
 
 "tab navigation"
-nmap <C-l> :tabn<CR>    " Switch to the next tab
-nmap <C-h> :tabp<CR>    " Switch to the previous tab
-nmap <C-n> :tabnew<CR>  " Open a new tab
-nmap <C-x> :tabclose<CR>" Close current tab
-nmap <silent> <A-PageUp> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>h " Move current tab to the left (h suffix to keep cursor in the place)
-nmap <silent> <A-PageDown> :execute 'silent! tabmove ' . tabpagenr()<CR>hhhh " Move current tab to the right (hhhh suffix to keep cursor in place)
+nmap <C-w><C-l> :tabn<CR>     " Switch to the next tab
+nmap <C-w><C-h> :tabp<CR>     " Switch to the previous tab
+nmap <C-w><C-n> :tabnew<CR>   " Open a new tab
+nmap <C-w><C-x> :tabclose<CR> " Close current tab
+nmap <C-w><C-q> :-tabmove<CR> " Move current tab to the left
+nmap <C-w><C-w> :+tabmove<CR> " Move current tab to the right
 
 "highlight before searching
 nmap * *N
@@ -46,11 +46,15 @@ nmap # #N
 "fold options
 set foldmethod=indent " auto fold based on indent level
 set nofoldenable
-"au BufWinLeave *.* mkview " autocommand on closing a file to store the folds 
-"au BufWinEnter *.* silent loadview " autocommand on opening a file to file's latest fold configuration
 
-"enable mouse in all modes
-set mouse=a
+"enable mouse
+set mouse=r
+
+" ####### act syntax highlighting ############################################
+au BufRead,BufNewFile *.hac set filetype=hackt
+au BufRead,BufNewFile *.actmx set filetype=hackt
+au BufRead,BufNewFile *.act set filetype=hackt
+au! Syntax hackt source ~/.vim/syntax/hackt.vim
 
 " ####### vim-plug ###########################################################
 " install
@@ -60,17 +64,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 " plugin section
 call plug#begin('~/.vim/plugged')
-Plug 'powerline/powerline', { 'rtp': 'powerline/bindings/vim' }
-Plug 'vim-syntastic/syntastic'
+    Plug 'powerline/powerline', { 'rtp': 'powerline/bindings/vim' }
+    Plug 'vim-syntastic/syntastic'
+    Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
-" act syntax highlighting
-au BufRead,BufNewFile *.hac set filetype=hackt
-au BufRead,BufNewFile *.actmx set filetype=hackt
-au BufRead,BufNewFile *.act set filetype=hackt
-au! Syntax hackt source ~/.vim/syntax/hackt.vim
-
-"syntastic options
+" ####### syntastic ##########################################################
 let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': [] }
