@@ -1,4 +1,4 @@
-set	ls=2 " Show a status line even when only one window is shown
+set laststatus=2 " Show a status line even when only one window is shown
 set showcmd " Show command completion as typing command
 set incsearch " Highlight as searched phrase is entered
 set hlsearch " Highlight searched phrases
@@ -15,12 +15,6 @@ set tags=tags;~ " Look for tags recursively until home directory is reached
 set colorcolumn=80 "highlight column 80
 syntax enable "enable syntax highlighting
 filetype plugin on "enable filetype specific settings
-
-"setting up solarized colorscheme
-" set t_Co=256 "enable 256-color mode
-let g:solarized_termcolors=256
-set background=dark
-" colorscheme solarized
 
 "move up and down within a wrapped line
 nnoremap k gk
@@ -58,8 +52,23 @@ set nofoldenable
 "enable mouse in all modes
 set mouse=a
 
-"pathogen for easy installation of plugins
-execute pathogen#infect()
+" ####### vim-plug ###########################################################
+" install
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+" plugin section
+call plug#begin('~/.vim/plugged')
+Plug 'powerline/powerline', { 'rtp': 'powerline/bindings/vim' }
+Plug 'vim-syntastic/syntastic'
+call plug#end()
+
+" act syntax highlighting
+au BufRead,BufNewFile *.hac set filetype=hackt
+au BufRead,BufNewFile *.actmx set filetype=hackt
+au BufRead,BufNewFile *.act set filetype=hackt
+au! Syntax hackt source ~/.vim/syntax/hackt.vim
 
 "syntastic options
 let g:syntastic_mode_map = { 'mode': 'passive',
@@ -69,8 +78,3 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 let g:syntastic_python_pylint_args="--max-line-length=130 
                                    \--max-args=10 "
 command Scheck SyntasticCheck
-
-au BufRead,BufNewFile *.hac set filetype=hackt
-au BufRead,BufNewFile *.actmx set filetype=hackt
-au BufRead,BufNewFile *.act set filetype=hackt
-au! Syntax hackt source ~/.vim/syntax/hackt.vim
