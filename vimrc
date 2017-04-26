@@ -5,6 +5,7 @@ set hlsearch " Highlight searched phrases
 set ruler " Always show info along bottom
 set title " Always show title of file along bottom
 set number " Show line numbers 
+set relativenumber " Show relative line numbers
 set tabstop=4 " Number of columns in a tab
 set shiftwidth=4  " Number of columns with << and >> and auto C-style indentation
 set softtabstop=4 " Number of columns the Tab inserts in insert mode
@@ -67,6 +68,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'powerline/powerline', { 'rtp': 'powerline/bindings/vim' }
     Plug 'vim-syntastic/syntastic'
     Plug 'christoomey/vim-tmux-navigator'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()
 
 " ####### syntastic ##########################################################
@@ -77,3 +80,17 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 let g:syntastic_python_pylint_args="--max-line-length=130 
                                    \--max-args=10 "
 command Scheck SyntasticCheck
+
+" ####### vim-gitgutter ######################################################
+set updatetime=250
+" ]c jump to next hunk
+" [c jump to previous hunk
+" <Leader>hs hunk stage
+" <Leader>hu hunk unstage
+
+" ####### vim-buffergator ####################################################
+" <leader>b to list buffers
+" in buffer listing:
+"   <C-v> to open in vertical split
+"   <C-s> to open in horizontal split
+"   <C-t> to open in new tab
