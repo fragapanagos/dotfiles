@@ -14,6 +14,7 @@ set autoindent " Use previous line's indentation on next line
 set smartindent " does the right thing (mostly) in programs. turn off if annoying
 set tags=tags;~ " Look for tags recursively until home directory is reached
 set colorcolumn=80 "highlight column 80
+set pastetoggle=<F3> "F3 button to triggle paste mode (turns off autoindent)
 syntax enable "enable syntax highlighting
 filetype plugin on "enable filetype specific settings
 
