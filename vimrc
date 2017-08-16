@@ -66,7 +66,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 " plugin section
 call plug#begin('~/.vim/plugged')
-    Plug 'powerline/powerline', { 'rtp': 'powerline/bindings/vim' }
+    if has("python") || has("python3")
+        Plug 'powerline/powerline', { 'rtp': 'powerline/bindings/vim' }
+    endif
     Plug 'vim-syntastic/syntastic'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'airblade/vim-gitgutter'
