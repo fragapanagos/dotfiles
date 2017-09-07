@@ -52,6 +52,36 @@ set nofoldenable
 "enable mouse
 set mouse=r
 
+" ####### cscope #############################################################
+if has("cscope")
+	set csto=0
+	set cst
+	set nocsverb
+	" add any database in current directory
+	if filereadable("cscope.out")
+	    cs add cscope.out
+	" else add database pointed to by environment
+	elseif $CSCOPE_DB != ""
+	    cs add $CSCOPE_DB
+	endif
+	set csverb
+
+    function Cscope_find_definition(querytype, name) abort
+        execute "cs find" a:querytype a:name
+        " if cursor is not on a:name, look for it
+        " some cscope commands only go to the start of the line containing a:name
+        " instead of going to a:name itself
+        if expand("<cword>") !=# a:name
+            call search(a:name)
+        endif
+        normal! zz
+    endfunction
+
+    map g<C-]> :call Cscope_find_definition("g", expand("<cword>"))<CR>
+    map g<C-[> :call Cscope_find_definition("c", expand("<cword>"))<CR>
+    map g<C-\> :call Cscope_find_definition("s", expand("<cword>"))<CR>
+endif
+
 " ####### act syntax highlighting ############################################
 au BufRead,BufNewFile *.hac set filetype=hackt
 au BufRead,BufNewFile *.actmx set filetype=hackt
