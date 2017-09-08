@@ -10,7 +10,7 @@ set tabstop=4 " Number of columns in a tab
 set shiftwidth=4  " Number of columns with << and >> and auto C-style indentation
 set softtabstop=4 " Number of columns the Tab inserts in insert mode
 set expandtab " Expand tabs into spaces
-set autoindent " Use previous line's indentation on next line
+" set autoindent " Use previous line's indentation on next line
 set smartindent " does the right thing (mostly) in programs. turn off if annoying
 set tags=tags;~ " Look for tags recursively until home directory is reached
 set colorcolumn=80 "highlight column 80
@@ -42,8 +42,8 @@ nmap <C-w><C-q> :-tabmove<CR> " Move current tab to the left
 nmap <C-w><C-w> :+tabmove<CR> " Move current tab to the right
 
 "highlight before searching
-nmap * *N
-nmap # #N
+nmap * *Nzz
+nmap # #Nzz
 
 "fold options
 set foldmethod=indent " auto fold based on indent level
@@ -66,8 +66,14 @@ if has("cscope")
 	endif
 	set csverb
 
-    function Cscope_find_definition(querytype, name) abort
-        execute "cs find" a:querytype a:name
+    function Cscope_find_definition(querytype, name, splittype) abort
+        if a:splittype == "vertical"
+            execute "vert scs find" a:querytype a:name
+        elseif a:splittype == "none"
+            execute "cs find" a:querytype a:name
+        elseif a:splittype == "horizontal"
+            execute "scs find" a:querytype a:name
+        endif
         " if cursor is not on a:name, look for it
         " some cscope commands only go to the start of the line containing a:name
         " instead of going to a:name itself
@@ -77,9 +83,17 @@ if has("cscope")
         normal! zz
     endfunction
 
-    map g<C-]> :call Cscope_find_definition("g", expand("<cword>"))<CR>
-    map g<C-[> :call Cscope_find_definition("c", expand("<cword>"))<CR>
-    map g<C-\> :call Cscope_find_definition("s", expand("<cword>"))<CR>
+    map f<C-]> :call Cscope_find_definition("g", expand("<cword>"), "vertical")<CR>
+    map f<C-[> :call Cscope_find_definition("c", expand("<cword>"), "vertical")<CR>
+    map f<C-\> :call Cscope_find_definition("s", expand("<cword>"), "vertical")<CR>
+
+    map ff<C-]> :call Cscope_find_definition("g", expand("<cword>"), "none")<CR>
+    map ff<C-[> :call Cscope_find_definition("c", expand("<cword>"), "none")<CR>
+    map ff<C-\> :call Cscope_find_definition("s", expand("<cword>"), "none")<CR>
+
+    map fff<C-]> :call Cscope_find_definition("g", expand("<cword>"), "horizontal")<CR>
+    map fff<C-[> :call Cscope_find_definition("c", expand("<cword>"), "horizontal")<CR>
+    map fff<C-\> :call Cscope_find_definition("s", expand("<cword>"), "horizontal")<CR>
 endif
 
 " ####### act syntax highlighting ############################################
