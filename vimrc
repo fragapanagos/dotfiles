@@ -52,6 +52,9 @@ set nofoldenable
 "enable mouse
 set mouse=r
 
+" remove unwanted whitespace with F5
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " ####### cscope #############################################################
 if has("cscope")
 	set csto=0
