@@ -6,14 +6,14 @@ set ruler " Always show info along bottom
 set title " Always show title of file along bottom
 set number " Show line numbers
 set relativenumber " Show relative line numbers
-set tabstop=4 " Number of columns in a tab
+set tabstop=4 " Number of columns in a tab. See F2 command below for toggle
 set shiftwidth=4  " Number of columns with << and >> and auto C-style indentation
 set softtabstop=4 " Number of columns the Tab inserts in insert mode
 set expandtab " Expand tabs into spaces
 " set autoindent " Use previous line's indentation on next line
 set smartindent " does the right thing (mostly) in programs. turn off if annoying
 set tags=tags;~ " Look for tags recursively until home directory is reached
-set colorcolumn=80 "highlight column 80
+set colorcolumn=80 "highlight column 80 by default, see F4 command below for toggle
 syntax enable "enable syntax highlighting
 filetype plugin on "enable filetype specific settings
 
@@ -51,14 +51,27 @@ set nofoldenable
 "enable mouse
 set mouse=r
 
-" F3 to triggle paste mode (turns off autoindent)
+" F2 to toggle between 2 and 4 space indents
+function Toggle_indent() abort
+    if &l:tabstop == 4
+        set tabstop=2
+        set shiftwidth=2
+        set softtabstop=2
+    else
+        set tabstop=4
+        set shiftwidth=4
+        set softtabstop=4
+    endif
+endfunction
+nnoremap <silent> <F2> :call Toggle_indent() <CR>
+" F3 to toggle paste mode (turns off autoindent)
 set pastetoggle=<F3>
 " F4 to toggle color column
 function Toggle_colorcolumn(cc) abort
     if &l:colorcolumn == a:cc
         execute "set colorcolumn="
     else
-        execute "set colorcolumn=80"
+        execute "set colorcolumn=".a:cc
     endif
 endfunction
 nnoremap <silent> <F4> :call Toggle_colorcolumn(80) <CR>
@@ -67,17 +80,17 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 
 " ####### cscope #############################################################
 if has("cscope")
-	set csto=0
-	set cst
-	set nocsverb
-	" add any database in current directory
-	if filereadable("cscope.out")
-	    cs add cscope.out
-	" else add database pointed to by environment
-	elseif $CSCOPE_DB != ""
-	    cs add $CSCOPE_DB
-	endif
-	set csverb
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set csverb
 
     function Cscope_find_definition(querytype, name, splittype) abort
         if a:splittype == "vertical"
