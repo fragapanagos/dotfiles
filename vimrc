@@ -4,7 +4,7 @@ set incsearch " Highlight as searched phrase is entered
 set hlsearch " Highlight searched phrases
 set ruler " Always show info along bottom
 set title " Always show title of file along bottom
-set number " Show line numbers 
+set number " Show line numbers
 set relativenumber " Show relative line numbers
 set tabstop=4 " Number of columns in a tab
 set shiftwidth=4  " Number of columns with << and >> and auto C-style indentation
@@ -14,7 +14,6 @@ set expandtab " Expand tabs into spaces
 set smartindent " does the right thing (mostly) in programs. turn off if annoying
 set tags=tags;~ " Look for tags recursively until home directory is reached
 set colorcolumn=80 "highlight column 80
-set pastetoggle=<F3> "F3 button to triggle paste mode (turns off autoindent)
 syntax enable "enable syntax highlighting
 filetype plugin on "enable filetype specific settings
 
@@ -52,7 +51,18 @@ set nofoldenable
 "enable mouse
 set mouse=r
 
-" remove unwanted whitespace with F5
+" F3 to triggle paste mode (turns off autoindent)
+set pastetoggle=<F3>
+" F4 to toggle color column
+function Toggle_colorcolumn(cc) abort
+    if &l:colorcolumn == a:cc
+        execute "set colorcolumn="
+    else
+        execute "set colorcolumn=80"
+    endif
+endfunction
+nnoremap <silent> <F4> :call Toggle_colorcolumn(80) <CR>
+" F5 to remove unwanted whitespace
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 " ####### cscope #############################################################
@@ -127,7 +137,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': [] }
     "note blank space or comma at end of lines
-let g:syntastic_python_pylint_args="--max-line-length=130 
+let g:syntastic_python_pylint_args="--max-line-length=130
                                    \--max-args=10 "
 command Scheck SyntasticCheck
 
