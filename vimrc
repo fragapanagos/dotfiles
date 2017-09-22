@@ -13,7 +13,7 @@ set expandtab " Expand tabs into spaces
 " set autoindent " Use previous line's indentation on next line
 set smartindent " does the right thing (mostly) in programs. turn off if annoying
 set tags=tags;~ " Look for tags recursively until home directory is reached
-set colorcolumn=80 "highlight column 80 by default, see F4 command below for toggle
+set colorcolumn=100 "highlight column 100 by default, see F4 command below for toggle
 syntax enable "enable syntax highlighting
 filetype plugin on "enable filetype specific settings
 
@@ -74,7 +74,7 @@ function Toggle_colorcolumn(cc) abort
         execute "set colorcolumn=".a:cc
     endif
 endfunction
-nnoremap <silent> <F4> :call Toggle_colorcolumn(80) <CR>
+nnoremap <silent> <F4> :call Toggle_colorcolumn(100) <CR>
 " F5 to remove unwanted whitespace
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
