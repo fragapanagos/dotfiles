@@ -51,6 +51,7 @@ set nofoldenable
 "enable mouse
 set mouse=r
 
+" ####### Function F key mappings ############################################
 " F2 to toggle between 2 and 4 space indents
 function Toggle_indent() abort
     if &l:tabstop == 4
@@ -77,6 +78,8 @@ endfunction
 nnoremap <silent> <F4> :call Toggle_colorcolumn(100) <CR>
 " F5 to remove unwanted whitespace
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+" F8 to open directory of current file
+nnoremap <silent> <F8> :e %:h <CR>
 
 " ####### cscope #############################################################
 if has("cscope")
